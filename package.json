@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://tan-joy-xl.github.io/joytan",
+  "homepage": "https://tan-joy-xl.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
