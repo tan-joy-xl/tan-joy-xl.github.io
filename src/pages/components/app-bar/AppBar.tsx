@@ -12,6 +12,19 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import styled from '@emotion/styled'
+
+const StyledAppBar = styled(AppBar)({
+  maxHeight: '52px',
+  '& .app-bar-container': {
+    minHeight: 0,
+    height: '100% !important',
+    '& .app-bar-toolbar': {
+      minHeight: 0,
+      height: '52px',
+    },
+  },
+});
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -36,9 +49,9 @@ const ResponsiveAppBar = (): React.ReactElement => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <StyledAppBar position="static">
+      <Container className="app-bar-container">
+        <Toolbar className="app-bar-toolbar" disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -51,16 +64,15 @@ const ResponsiveAppBar = (): React.ReactElement => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Blogs
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              size="large"
+              size="medium"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
@@ -107,11 +119,10 @@ const ResponsiveAppBar = (): React.ReactElement => {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Blogs
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -128,7 +139,7 @@ const ResponsiveAppBar = (): React.ReactElement => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="/" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -156,7 +167,7 @@ const ResponsiveAppBar = (): React.ReactElement => {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </StyledAppBar>
   );
 }
 export default ResponsiveAppBar;
