@@ -17,7 +17,7 @@ const StyledADBox = styled(Box)({
 
 const Home = (): ReactElement => {
   return (
-    <Box sx={{ minHeight: 600 }}>
+    <Box sx={{ minHeight: 1000 }}>
       <StyledHeard>
         <Box>
           <Typography fontSize={24}>Joy and Pear </Typography>

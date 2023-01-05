@@ -16,6 +16,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -83,9 +85,8 @@ const StyledMainBox = styled(Box)({
 });
 
 const StyledBottom = styled(Box)<{ theme: any }>(({ theme }) => ({
-  width: '100%',
-  height: '380px',
-  padding: 10,
+  height: '100%',
+  padding: 40,
   color: theme.subColor,
   backgroundColor: theme.palette.primary.main,
 }));
@@ -99,6 +100,12 @@ const StyledIconButton = styled(IconButton)<{ theme: any }>(({ theme }) => (({
     transition: '0.3s',
   }
 })));
+
+const StyledDivider = styled(Divider)<{ theme: any }>(({ theme }) => ({
+  marginTop: 40,
+  marginBottom: 40,
+  backgroundColor: theme.subColor,
+}));
 
 const App = (props: Props) => {
   const { window } = props;
@@ -120,7 +127,7 @@ const App = (props: Props) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Pear&Jony.
+        Pear&Jony
       </Typography>
       <Divider sx={{ bgcolor: 'rgba(84, 84, 84, .48)' }} />
       <List>
@@ -147,18 +154,18 @@ const App = (props: Props) => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
+              sx={{ mr: 2, display: { md: 'none' } }}
             >
               <MenuIcon />
             </IconButton>
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}
             >
-              Pear&Jony.
+              Pear&Jony
             </Typography>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
                   {item}
@@ -177,7 +184,7 @@ const App = (props: Props) => {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: 'block', sm: 'none' },
+              display: { xs: 'block', md: 'none' },
               '& .MuiDrawer-paper': {
                 boxSizing: 'border-box',
                 width: drawerWidth,
@@ -193,26 +200,106 @@ const App = (props: Props) => {
           <Toolbar />
           {useRoutes(appRoutes)}
           <StyledBottom theme={theme}>
-            <Typography variant="h3" sx={{ my: 2 }}>
-              Pear&Jony.
-            </Typography>
-            <Box sx={{ width: '300px' }}>
-              We bring you the latest WordPress News,
-              Reviews and Tutorials so you can learn
-              how to create amazing WordPress websites
-              for yourself and clients!
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              <Grid container spacing={6}>
+                <Grid item xs={4}>
+                  <Typography variant="h3">
+                    Pear&Jony
+                  </Typography>
+                  <Box>
+                    We bring you the latest WordPress News,
+                    Reviews and Tutorials so you can learn
+                    how to create amazing WordPress websites
+                    for yourself and clients!
+                  </Box>
+                  <Box sx={{ mt: 2 }}>
+                    <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
+                    {Actions.map((action: Action) => (
+                      <StyledIconButton
+                        theme={theme}
+                        sx={{ mr: 1, mt: 1 }}
+                        onClick={() => handleAction(action)}
+                      >
+                        {action.icon}
+                      </StyledIconButton>
+                    ))}
+                  </Box>
+                </Grid>
+
+                <Grid item xs={4}>
+                  <Box>
+                    <Typography variant="h5" sx={{ color:'rgb(249, 61, 83)' }}>
+                      Pear&Jony
+                    </Typography>
+                    We bring you the latest WordPress News,
+                    Reviews and Tutorials so you can learn
+                    how to create amazing WordPress websites
+                    for yourself and clients!
+                  </Box>
+                </Grid>
+                <Grid item xs={4}>
+                  <Box>
+                    <Typography variant="h5">
+                      Pear&Jony
+                    </Typography>
+                    We bring you the latest WordPress News,
+                    Reviews and Tutorials so you can learn
+                    how to create amazing WordPress websites
+                    for yourself and clients!
+                  </Box>
+                </Grid>
+
+              </Grid>
             </Box>
-            <Box>
-              {Actions.map((action: Action) => (
-                <StyledIconButton
-                  theme={theme}
-                  sx={{ mr: 1 }}
-                  onClick={() => handleAction(action)}
-                >
-                  {action.icon}
-                </StyledIconButton>
-              ))}
+
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+              <Stack spacing={6}>
+                <Box>
+                  <Typography variant="h3">
+                    Pear&Jony
+                  </Typography>
+                  <Box>
+                    We bring you the latest WordPress News,
+                    Reviews and Tutorials so you can learn
+                    how to create amazing WordPress websites
+                    for yourself and clients!
+                  </Box>
+                  <Box sx={{ mt: 2 }}>
+                    <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
+                    {Actions.map((action: Action) => (
+                      <StyledIconButton
+                        theme={theme}
+                        sx={{ mr: 1, mt: 1 }}
+                        onClick={() => handleAction(action)}
+                      >
+                        {action.icon}
+                      </StyledIconButton>
+                    ))}
+                  </Box>
+                </Box>
+
+                <Box>
+                  <Typography variant="h5" sx={{ color:'rgb(249, 61, 83)' }}>
+                    Pear&Jony
+                  </Typography>
+                  We bring you the latest WordPress News,
+                  Reviews and Tutorials so you can learn
+                  how to create amazing WordPress websites
+                  for yourself and clients!
+                </Box>
+                <Box>
+                  <Typography variant="h5">
+                    Pear&Jony
+                  </Typography>
+                  We bring you the latest WordPress News,
+                  Reviews and Tutorials so you can learn
+                  how to create amazing WordPress websites
+                  for yourself and clients!
+                </Box>
+
+              </Stack>
             </Box>
+            <StyledDivider theme={theme} />
           </StyledBottom>
         </StyledMainBox>
       </Box>
