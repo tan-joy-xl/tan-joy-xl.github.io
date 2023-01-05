@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
@@ -16,6 +17,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import RedditIcon from '@mui/icons-material/Reddit';
+import GitHubIcon from '@mui/icons-material/GitHub';
+
 import { appRoutes } from './pages/routers';
 import './App.css';
 
@@ -27,8 +35,43 @@ interface Props {
   window?: () => Window;
 }
 
+interface Action {
+  type: 'twitter' | 'facebook' | 'instagram' | 'youtube' | 'reddit' | 'github',
+  icon: ReactElement,
+  link?: string;
+}
+
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
+const Actions: Action[] = [
+  {
+    type: 'twitter',
+    icon: <TwitterIcon />,
+    link: 'https://twitter.com/JoyAdPear',
+  },
+  {
+    type: 'facebook',
+    icon: <FacebookIcon />
+  },
+  {
+    type: 'instagram',
+    icon: <InstagramIcon />
+  },
+  {
+    type: 'youtube',
+    icon: <YouTubeIcon />
+  },
+  {
+    type: 'reddit',
+    icon: <RedditIcon />
+  },
+  {
+    type: 'github',
+    icon: <GitHubIcon />,
+    link: 'https://github.com/tan-joy-xl',
+  },
+];
+
 const StyledContainer = styled(Box)({
   with: '100vw',
   height: '100vh',
@@ -47,6 +90,16 @@ const StyledBottom = styled(Box)<{ theme: any }>(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
 }));
 
+const StyledIconButton = styled(IconButton)<{ theme: any }>(({ theme }) => (({
+  backgroundColor: 'rgb(66, 66, 66)',
+  borderRadius: 4,
+  color: theme.fontColor,
+  '&:hover': {
+    backgroundColor: theme.palette.info.main,
+    transition: '0.3s',
+  }
+})));
+
 const App = (props: Props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -56,10 +109,18 @@ const App = (props: Props) => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleAction = (action: Action) => {
+    console.log(action, action);
+    if (!action.link || window) {
+      return alert('Just wait a fe time！it in development！ ♥ pear~');
+    }
+    open(action.link);
+  };
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        Pear&Joy.
+        Pear&Jony.
       </Typography>
       <Divider sx={{ bgcolor: 'rgba(84, 84, 84, .48)' }} />
       <List>
@@ -95,7 +156,7 @@ const App = (props: Props) => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-              Pear&Joy.
+              Pear&Jony.
             </Typography>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
@@ -133,12 +194,25 @@ const App = (props: Props) => {
           {useRoutes(appRoutes)}
           <StyledBottom theme={theme}>
             <Typography variant="h3" sx={{ my: 2 }}>
-              Pear&Joy.
+              Pear&Jony.
             </Typography>
-            We bring you the latest WordPress News,
-            Reviews and Tutorials so you can learn
-            how to create amazing WordPress websites
-            for yourself and clients!
+            <Box sx={{ width: '300px' }}>
+              We bring you the latest WordPress News,
+              Reviews and Tutorials so you can learn
+              how to create amazing WordPress websites
+              for yourself and clients!
+            </Box>
+            <Box>
+              {Actions.map((action: Action) => (
+                <StyledIconButton
+                  theme={theme}
+                  sx={{ mr: 1 }}
+                  onClick={() => handleAction(action)}
+                >
+                  {action.icon}
+                </StyledIconButton>
+              ))}
+            </Box>
           </StyledBottom>
         </StyledMainBox>
       </Box>
