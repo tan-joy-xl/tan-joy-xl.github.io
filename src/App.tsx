@@ -117,7 +117,6 @@ const App = (props: Props) => {
   };
 
   const handleAction = (action: Action) => {
-    console.log(action, action);
     if (!action.link || window) {
       return alert('Just wait a fe time！it in development！ ♥ pear~');
     }
