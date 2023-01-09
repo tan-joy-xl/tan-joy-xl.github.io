@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import styled from '@emotion/styled';
@@ -18,6 +18,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -25,6 +27,10 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import RedditIcon from '@mui/icons-material/Reddit';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import { appRoutes } from './pages/routers';
 import './App.css';
@@ -50,27 +56,38 @@ const Actions: Action[] = [
     type: 'twitter',
     icon: <TwitterIcon />,
     link: 'https://twitter.com/JoyAdPear',
-  },
-  {
+  }, {
     type: 'facebook',
     icon: <FacebookIcon />
-  },
-  {
+  }, {
     type: 'instagram',
     icon: <InstagramIcon />
-  },
-  {
+  }, {
     type: 'youtube',
     icon: <YouTubeIcon />
-  },
-  {
+  }, {
     type: 'reddit',
     icon: <RedditIcon />
-  },
-  {
+  }, {
     type: 'github',
     icon: <GitHubIcon />,
     link: 'https://github.com/tan-joy-xl',
+  },
+];
+
+const tabs: any[] = [
+  {
+    icon: '',
+    label: 'ONE',
+  }, {
+    icon: '',
+    label: 'TWO',
+  }, {
+    icon: '',
+    label: 'THREE',
+  }, {
+    icon: '',
+    label: 'FOUR',
   },
 ];
 
@@ -84,7 +101,7 @@ const StyledMainBox = styled(Box)({
   height: '100%',
 });
 
-const StyledBottom = styled(Box)<{ theme: any }>(({ theme }) => ({
+const StyledFooter = styled(Box)<{ theme: any }>(({ theme }) => ({
   height: '100%',
   padding: 40,
   color: theme.subColor,
@@ -101,19 +118,116 @@ const StyledIconButton = styled(IconButton)<{ theme: any }>(({ theme }) => (({
   }
 })));
 
+const StyledTabsContainer = styled(Box)({
+  padding: '0 20px',
+  height: 50,
+  borderBottom: '1px solid rgb(232, 232, 232)',
+});
+
 const StyledDivider = styled(Divider)<{ theme: any }>(({ theme }) => ({
   marginTop: 40,
   marginBottom: 40,
   backgroundColor: theme.subColor,
 }));
 
+const StyledNavBar = styled(Box)({
+  paddingTop: '8px',
+  paddingBottom: '8px',
+  paddingLeft: '30px',
+  borderBottom: '1px solid #eee',
+  marginBottom: '20px',
+});
+
+const StyledADContainer = styled(Box)({
+  height: 130,
+  backgroundImage: 'url(/bg3.jpeg)',
+  backgroundSize: 'cover',
+  backgroundPositionY: '55%',
+});
+
+const StyledPageContainer = styled(Box)({
+  paddingLeft: '10px',
+  paddingRight: '10px',
+});
+
+const StyledCenterBox = styled(Box)<{ theme: any }>(({ theme }) => ({
+  height: 300,
+  paddingLeft: 40,
+  paddingRight: 40,
+  textAlign: 'center',
+  display: 'grid',
+  placeContent: 'center',
+  color: theme.fontColor,
+  backgroundColor: theme.palette.primary.main,
+}));
+
+const StyledLink = styled(Link)({
+  cursor: 'pointer',
+  fontSize: '14px',
+});
+
 const App = (props: Props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [value, setValue] = useState(0);
+  const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
   const theme = useTheme();
+
+  useEffect(() => {
+    getBreadcrumbs();
+  }, []);
+
+  const getBreadcrumbs = () => {
+    const pathlist = location.pathname === '/' ? [''] : location.pathname.split('/');
+    const breas = pathlist.map((item: any) => {
+      const curRoute = appRoutes[appRoutes.findIndex((route: any) => route?.path === item)];
+
+      if (curRoute) {
+        return {
+          name: curRoute?.name,
+          path: item ? item : '/',
+        }
+      }
+
+      return {
+        name: item,
+        path: item,
+      }
+    });
+
+    setBreadcrumbs(breas);
+  };
+
+  const renderBreadcrumbs = () => {
+    return breadcrumbs?.map((item: any, index: number) => {
+      if (index === breadcrumbs.length - 1) {
+        return <Typography
+          key="3axxd"
+          color="text.primary"
+          sx={{ fontSize: '14px' }}
+        >
+          {item?.name}
+        </Typography>;
+      }
+      return <StyledLink
+        key={item.path}
+        underline="none"
+        color="inherit"
+        href={item?.path || ''}
+      >
+        {item?.name}
+      </StyledLink>;
+    })
+  };
+
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
   };
 
   const handleAction = (action: Action) => {
@@ -195,10 +309,55 @@ const App = (props: Props) => {
             {drawer}
           </Drawer>
         </Box>
+
         <StyledMainBox component="main">
           <Toolbar />
-          {useRoutes(appRoutes)}
-          <StyledBottom theme={theme}>
+          {/* TODO tabs */}
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <StyledADContainer></StyledADContainer>
+
+            <StyledTabsContainer sx={{ pl: 2, pr: 2 }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                sx={{ height: '100%' }}
+              >
+                {tabs.map((tab: any, index: number) => (
+                  <Tab
+                    key={`${tab?.label}-${index}`}
+                    label={tab?.label}
+                    icon={<KeyboardArrowDownIcon />}
+                    iconPosition="end"
+                  />
+                ))}
+              </Tabs>
+            </StyledTabsContainer>
+
+            <StyledCenterBox theme={theme}>
+              <Typography variant="h4" sx={{ mb: 2 }} >Gaming</Typography>
+              A wonderful serenity has taken
+              possession of my entire soul,
+              like these sweet mornings of
+              spring which I enjoy with my whole heart.
+            </StyledCenterBox>
+
+            <StyledNavBar>
+              <Breadcrumbs
+                separator={<NavigateNextIcon fontSize="small" />}
+                aria-label="breadcrumb"
+              >
+                {renderBreadcrumbs()}
+              </Breadcrumbs>
+            </StyledNavBar>
+          </Box>
+
+          {/* page container */}
+          <StyledPageContainer>
+            {useRoutes(appRoutes)}
+          </StyledPageContainer>
+
+          {/* web footer */}
+          <StyledFooter theme={theme}>
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               <Grid container spacing={6}>
                 <Grid item xs={4}>
@@ -213,8 +372,9 @@ const App = (props: Props) => {
                   </Box>
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
-                    {Actions.map((action: Action) => (
+                    {Actions.map((action: Action, index: number) => (
                       <StyledIconButton
+                        key={`${action?.type}-${index}`}
                         theme={theme}
                         sx={{ mr: 1, mt: 1 }}
                         onClick={() => handleAction(action)}
@@ -227,7 +387,7 @@ const App = (props: Props) => {
 
                 <Grid item xs={4}>
                   <Box>
-                    <Typography variant="h5" sx={{ color:'rgb(249, 61, 83)' }}>
+                    <Typography variant="h5" sx={{ color: 'rgb(249, 61, 83)' }}>
                       Pear&Jony
                     </Typography>
                     We bring you the latest WordPress News,
@@ -265,8 +425,9 @@ const App = (props: Props) => {
                   </Box>
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
-                    {Actions.map((action: Action) => (
+                    {Actions.map((action: Action, index: number) => (
                       <StyledIconButton
+                        key={`${action?.type}-${index}`}
                         theme={theme}
                         sx={{ mr: 1, mt: 1 }}
                         onClick={() => handleAction(action)}
@@ -278,7 +439,7 @@ const App = (props: Props) => {
                 </Box>
 
                 <Box>
-                  <Typography variant="h5" sx={{ color:'rgb(249, 61, 83)' }}>
+                  <Typography variant="h5" sx={{ color: 'rgb(249, 61, 83)' }}>
                     Pear&Jony
                   </Typography>
                   We bring you the latest WordPress News,
@@ -299,7 +460,7 @@ const App = (props: Props) => {
               </Stack>
             </Box>
             <StyledDivider theme={theme} />
-          </StyledBottom>
+          </StyledFooter>
         </StyledMainBox>
       </Box>
     </StyledContainer>

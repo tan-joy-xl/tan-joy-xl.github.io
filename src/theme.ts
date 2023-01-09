@@ -7,6 +7,15 @@ const theme = createTheme({
     },
     secondary: purple,
   },
+  components: {
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          minHeight: 60,
+        },
+      },
+    },
+  },
 });
 
 export default createTheme(theme, {
