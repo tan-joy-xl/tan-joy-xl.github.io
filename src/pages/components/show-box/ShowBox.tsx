@@ -59,7 +59,7 @@ const StyledMoveBox = styled(Box)({
   transition: '.35s ease',
   '& .sub-title': {
     color: 'rgba(255, 255, 255, 0)',
-    transition: '.5s ease',
+    transition: '.3s ease',
   },
 });
 

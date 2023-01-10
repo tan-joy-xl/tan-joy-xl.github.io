@@ -161,16 +161,49 @@ const StyledCenterBox = styled(Box)<{ theme: any }>(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
 }));
 
+const StyledTab = styled(Tab)<{ theme: any }>(({ theme }) => ({
+  position: 'relative',
+  '&:after': {
+    display: 'block',
+    content: 'close-quote',
+    width: 0,
+    height: '2px',
+    backgroundColor: theme.palette.primary.main,
+    position: 'absolute',
+    bottom: 10,
+    zIndex: 2,
+    transition: '.5s ease',
+  },
+  '&:hover': {
+    transition: '.5s ease',
+    '&:after': {
+      width: '90%',
+      transition: '1.5s ease',
+    }
+  },
+}));
+
 const StyledLink = styled(Link)({
   cursor: 'pointer',
   fontSize: '14px',
 });
 
+const StyledTabPanel = styled(Box)({
+  display: 'block',
+  width: '600px',
+  height: '300px',
+});
+
 const App = (props: Props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [tabVal, setTabVal] = useState(0);
   const [value, setValue] = useState(0);
   const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
+  const [opentab, setOpentab] = useState(false);
+  const [timer, setTimer] = useState(0);
+
+
   const theme = useTheme();
 
   useEffect(() => {
@@ -198,6 +231,21 @@ const App = (props: Props) => {
     setBreadcrumbs(breas);
   };
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const handleAction = (action: Action) => {
+    if (!action.link || window) {
+      return alert('Just wait a fe time！it in development！ ♥ pear~');
+    }
+    open(action.link);
+  };
+
   const renderBreadcrumbs = () => {
     return breadcrumbs?.map((item: any, index: number) => {
       if (index === breadcrumbs.length - 1) {
@@ -218,23 +266,6 @@ const App = (props: Props) => {
         {item?.name}
       </StyledLink>;
     })
-  };
-
-
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  const handleAction = (action: Action) => {
-    if (!action.link || window) {
-      return alert('Just wait a fe time！it in development！ ♥ pear~');
-    }
-    open(action.link);
   };
 
   const drawer = (
@@ -323,17 +354,25 @@ const App = (props: Props) => {
                 sx={{ height: '100%' }}
               >
                 {tabs.map((tab: any, index: number) => (
-                  <Tab
+                  <StyledTab
+                    theme={theme}
                     key={`${tab?.label}-${index}`}
                     label={tab?.label}
                     icon={<KeyboardArrowDownIcon />}
                     iconPosition="end"
+                    onMouseOver={() => setTabVal(index)}
                   />
                 ))}
+
               </Tabs>
+              {tabVal === 0 && <StyledTabPanel >Item One</StyledTabPanel>}
+              {tabVal === 1 && <StyledTabPanel >Item Two</StyledTabPanel>}
+              {tabVal === 2 && <StyledTabPanel >Item Three</StyledTabPanel>}
+              {tabVal === 3 && <StyledTabPanel >Item Four</StyledTabPanel>}
+
             </StyledTabsContainer>
 
-            <StyledCenterBox theme={theme}>
+            <StyledCenterBox theme={theme} sx={{ mt: 2 }}>
               <Typography variant="h4" sx={{ mb: 2 }} >Gaming</Typography>
               A wonderful serenity has taken
               possession of my entire soul,
