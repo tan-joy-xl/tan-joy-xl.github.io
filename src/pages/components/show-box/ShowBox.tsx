@@ -2,25 +2,30 @@ import { ReactElement } from 'react';
 import Box from '@mui/material/Box';
 import styled from '@emotion/styled';
 import Typography from '@mui/material/Typography';
+import { margin } from '@mui/system';
 
 interface ShowBoxProps {
-
+  tag?: string;
+  title?: string;
+  subTitle?: any;
 };
 
 const StyledContainer = styled(Box)({
+  overflow: 'hidden',
   height: '100%',
   minHeight: '130px',
   position: 'relative',
-  overflow: 'hidden',
   backgroundImage: 'url(/bg3.jpeg)',
   backgroundSize: '120%',
   backgroundPositionX: '50%',
+  backgroundRepeat: 'no-repeat',
   color: 'rgb(255, 255, 255)',
   transition: '.35s ease',
   cursor: 'pointer',
+  fontSize: '1em',
 
   '&:hover': {
-    backgroundPositionX: '40%',
+    backgroundPositionX: '35%',
     transition: '.35s ease',
     '&:after': {
       content: 'close-quote',
@@ -33,14 +38,29 @@ const StyledContainer = styled(Box)({
       zIndex: 2,
       background: 'hsla(0, 0%, 90%, .15)',
       transition: '.35s ease',
-    }
+    },
+
+    '& .move-box': {
+      bottom: '10%',
+      transition: '.35s ease',
+      '& .sub-title': {
+        color: 'rgba(255, 255, 255, 1)',
+        transition: '.35s ease',
+      },
+    },
   },
 });
 
 const StyledMoveBox = styled(Box)({
   position: 'absolute',
   left: '20px',
-  bottom: '10%',
+  bottom: '-8%',
+  fontSize: '1em',
+  transition: '.35s ease',
+  '& .sub-title': {
+    color: 'rgba(255, 255, 255, 0)',
+    transition: '.5s ease',
+  },
 });
 
 const StyledTag = styled(Typography)({
@@ -52,16 +72,25 @@ const StyledTag = styled(Typography)({
   marginBottom: '5px',
 });
 
+const StyledSubTitle = styled(Box)({
+  marginTop: 20,
+});
+
 
 
 export const ShowBox = (props: ShowBoxProps): ReactElement => {
+  const { tag, title, subTitle } = props;
   return (
     <StyledContainer>
-      <StyledMoveBox>
-        <StyledTag>Politics</StyledTag>
-        <Typography>These Are the 5 Big Tech Stories to Watch in 2017</Typography>
-        <Box>Ferdy Korpershoek</Box>
-        <Box>Ferdy Korpershoek</Box>
+      <StyledMoveBox className="move-box">
+        <StyledTag>{tag || 'Politics'}</StyledTag>
+        <Typography variant="h5" sx={{ fontSize: '1.4em' }}>
+          {title || 'These Are the 5 Big Tech Stories to Watch in 2017'}
+        </Typography>
+
+        <StyledSubTitle className="sub-title">
+          {subTitle || <Typography color="inherit" sx={{ fontSize: '0.8em' }}>Ferdy Korpershoek</Typography>}
+        </StyledSubTitle>
       </StyledMoveBox>
     </StyledContainer>
   )

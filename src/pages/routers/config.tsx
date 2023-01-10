@@ -3,7 +3,7 @@ import Home from "../home/home";
 export const appRoutes = [
   {
     path: '',
-    name: '首页',
+    name: 'HOME',
     permissions: [],
     element: <Home />,
     // icon: <HomeOutlinedIcon />

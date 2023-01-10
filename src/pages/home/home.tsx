@@ -18,11 +18,11 @@ const Home = (): ReactElement => {
 
   return (
     <StyledPage>
-      <Grid container spacing={1.5}>
-        <Grid item xs={9}>
+      <Grid container spacing={1.5} sx={{ height: '68vh' }}>
+        <Grid item xs={9} sx={{ fontSize: '2vw' }}>
           <ShowBox></ShowBox>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={3} sx={{ fontSize: '1vw', display: { xs: 'none', md: 'block' } }}>
           <Stack direction="column" spacing={1.5}>
             <ShowBox></ShowBox>
             <ShowBox></ShowBox>
