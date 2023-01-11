@@ -118,12 +118,6 @@ const StyledIconButton = styled(IconButton)<{ theme: any }>(({ theme }) => (({
   }
 })));
 
-const StyledTabsContainer = styled(Box)({
-  padding: '0 20px',
-  height: 50,
-  borderBottom: '1px solid rgb(232, 232, 232)',
-});
-
 const StyledDivider = styled(Divider)<{ theme: any }>(({ theme }) => ({
   marginTop: 40,
   marginBottom: 40,
@@ -161,6 +155,21 @@ const StyledCenterBox = styled(Box)<{ theme: any }>(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
 }));
 
+const StyledTabsContainer = styled(Box)({
+  display: 'inline-block',
+  padding: '0 20px',
+  height: 50,
+  borderBottom: '1px solid rgb(232, 232, 232)',
+});
+
+const StyledTabs = styled(Tabs)({
+  '&:hover + #tabs-panel': {
+    opacity: 1,
+    display: 'block',
+    transition: '2s ease',
+  },
+});
+
 const StyledTab = styled(Tab)<{ theme: any }>(({ theme }) => ({
   position: 'relative',
   '&:after': {
@@ -179,7 +188,7 @@ const StyledTab = styled(Tab)<{ theme: any }>(({ theme }) => ({
     '&:after': {
       width: '90%',
       transition: '1.5s ease',
-    }
+    },
   },
 }));
 
@@ -189,9 +198,22 @@ const StyledLink = styled(Link)({
 });
 
 const StyledTabPanel = styled(Box)({
-  display: 'block',
-  width: '600px',
-  height: '300px',
+  maxWidth: '90vw',
+  padding: 20,
+  margin: '1 auto',
+  position: 'absolute',
+  display: 'none',
+  opacity: 0,
+  height: 300,
+  backgroundColor: '#ffffff',
+  zIndex: 2,
+  transition: '2s ease',
+  border: '1px solid #eee',
+  '&:hover': {
+    opacity: 1,
+    display: 'block',
+    transition: '2s ease',
+  },
 });
 
 const App = (props: Props) => {
@@ -200,9 +222,6 @@ const App = (props: Props) => {
   const [tabVal, setTabVal] = useState(0);
   const [value, setValue] = useState(0);
   const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
-  const [opentab, setOpentab] = useState(false);
-  const [timer, setTimer] = useState(0);
-
 
   const theme = useTheme();
 
@@ -348,13 +367,15 @@ const App = (props: Props) => {
             <StyledADContainer></StyledADContainer>
 
             <StyledTabsContainer sx={{ pl: 2, pr: 2 }}>
-              <Tabs
+              <StyledTabs
+                className="tabs"
                 value={value}
                 onChange={handleChange}
                 sx={{ height: '100%' }}
               >
                 {tabs.map((tab: any, index: number) => (
                   <StyledTab
+                    className="tab-item"
                     theme={theme}
                     key={`${tab?.label}-${index}`}
                     label={tab?.label}
@@ -364,13 +385,13 @@ const App = (props: Props) => {
                   />
                 ))}
 
-              </Tabs>
-              {tabVal === 0 && <StyledTabPanel >Item One</StyledTabPanel>}
-              {tabVal === 1 && <StyledTabPanel >Item Two</StyledTabPanel>}
-              {tabVal === 2 && <StyledTabPanel >Item Three</StyledTabPanel>}
-              {tabVal === 3 && <StyledTabPanel >Item Four</StyledTabPanel>}
+              </StyledTabs>
 
+              <StyledTabPanel id="tabs-panel">
+                {tabVal}
+              </StyledTabPanel>
             </StyledTabsContainer>
+
 
             <StyledCenterBox theme={theme} sx={{ mt: 2 }}>
               <Typography variant="h4" sx={{ mb: 2 }} >Gaming</Typography>
