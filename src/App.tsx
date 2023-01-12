@@ -79,15 +79,43 @@ const tabs: any[] = [
   {
     icon: '',
     label: 'ONE',
+    context: {
+      title: 'Gaming One',
+      content: `A wonderful serenity has taken
+      possession of my entire soul,
+      like these sweet mornings of
+      spring which I enjoy with my whole heart.`
+    },
   }, {
     icon: '',
     label: 'TWO',
+    context: {
+      title: 'Gaming Two',
+      content: `A wonderful serenity has taken
+      possession of my entire soul,
+      like these sweet mornings of
+      spring which I enjoy with my whole heart.`
+    },
   }, {
     icon: '',
     label: 'THREE',
+    context: {
+      title: 'Gaming Three',
+      content: `A wonderful serenity has taken
+      possession of my entire soul,
+      like these sweet mornings of
+      spring which I enjoy with my whole heart.`
+    },
   }, {
     icon: '',
     label: 'FOUR',
+    context: {
+      title: 'Gaming Four',
+      content: `A wonderful serenity has taken
+      possession of my entire soul,
+      like these sweet mornings of
+      spring which I enjoy with my whole heart.`
+    },
   },
 ];
 
@@ -222,11 +250,14 @@ const App = (props: Props) => {
   const [tabVal, setTabVal] = useState(0);
   const [value, setValue] = useState(0);
   const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
+  const [tipBoxOpt, setTipBoxOpt] = useState<any>({});
+
 
   const theme = useTheme();
 
   useEffect(() => {
     getBreadcrumbs();
+    setTipBoxOpt(tabs[0]?.context)
   }, []);
 
   const getBreadcrumbs = () => {
@@ -256,6 +287,7 @@ const App = (props: Props) => {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    setTipBoxOpt(tabs[newValue]?.context || {});
   };
 
   const handleAction = (action: Action) => {
@@ -394,11 +426,8 @@ const App = (props: Props) => {
 
 
             <StyledCenterBox theme={theme} sx={{ mt: 2 }}>
-              <Typography variant="h4" sx={{ mb: 2 }} >Gaming</Typography>
-              A wonderful serenity has taken
-              possession of my entire soul,
-              like these sweet mornings of
-              spring which I enjoy with my whole heart.
+              <Typography variant="h4" sx={{ mb: 2 }} >{tipBoxOpt?.title}</Typography>
+              {tipBoxOpt?.content}
             </StyledCenterBox>
 
             <StyledNavBar>
