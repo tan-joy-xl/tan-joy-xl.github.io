@@ -28,6 +28,8 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import RedditIcon from '@mui/icons-material/Reddit';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { WeiboOutlined } from '@ant-design/icons';
+
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -44,7 +46,7 @@ interface Props {
 }
 
 interface Action {
-  type: 'twitter' | 'facebook' | 'instagram' | 'youtube' | 'reddit' | 'github',
+  type: 'twitter' | 'facebook' | 'instagram' | 'youtube' | 'reddit' | 'github' | '微博',
   icon: ReactElement,
   link?: string;
 }
@@ -58,7 +60,8 @@ const Actions: Action[] = [
     link: 'https://twitter.com/JoyAdPear',
   }, {
     type: 'facebook',
-    icon: <FacebookIcon />
+    icon: <FacebookIcon />,
+    link: 'https://www.facebook.com/profile.php?id=100089281386990',
   }, {
     type: 'instagram',
     icon: <InstagramIcon />
@@ -72,6 +75,10 @@ const Actions: Action[] = [
     type: 'github',
     icon: <GitHubIcon />,
     link: 'https://github.com/tan-joy-xl',
+  }, {
+    type: '微博',
+    icon: <WeiboOutlined />,
+    link: 'https://weibo.com/u/3898663642',
   },
 ];
 
