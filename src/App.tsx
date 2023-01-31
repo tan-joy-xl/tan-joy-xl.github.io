@@ -168,8 +168,8 @@ const StyledADContainer = styled(Box)({
 });
 
 const StyledPageContainer = styled(Box)({
-  paddingLeft: '10px',
-  paddingRight: '10px',
+  paddingLeft: '2vw',
+  paddingRight: '2vw',
 });
 
 const StyledCenterBox = styled(Box)<{ theme: any }>(({ theme }) => ({
@@ -321,9 +321,10 @@ const App = (props: Props) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      {/* <Typography variant="h6" sx={{ my: 2 }}>
         Pear&Jony
-      </Typography>
+      </Typography> */}
+      <Toolbar />
       <Divider sx={{ bgcolor: 'rgba(84, 84, 84, .48)' }} />
       <List>
         {navItems.map((item) => (
@@ -343,13 +344,13 @@ const App = (props: Props) => {
     <StyledContainer>
       <Box sx={{ display: 'flex' }}>
         <AppBar component="nav">
-          <Toolbar>
+          <Toolbar sx={{ position: 'relative' }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { md: 'none' } }}
+              sx={{ mr: 2, display: { md: 'none' }, position: 'absolute' }}
             >
               <MenuIcon />
             </IconButton>
@@ -360,6 +361,16 @@ const App = (props: Props) => {
             >
               Pear&Jony
             </Typography>
+            <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+              <Typography
+                variant="h6"
+                component="span"
+                sx={{ display: { xs: 'block', md: 'none' } }}
+              >
+                Pear&Jony
+              </Typography>
+            </Box>
+
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
@@ -430,15 +441,16 @@ const App = (props: Props) => {
               {tipBoxOpt?.content}
             </StyledCenterBox>
 
-            <StyledNavBar>
-              <Breadcrumbs
-                separator={<NavigateNextIcon fontSize="small" />}
-                aria-label="breadcrumb"
-              >
-                {renderBreadcrumbs()}
-              </Breadcrumbs>
-            </StyledNavBar>
+
           </Box>
+          <StyledNavBar>
+            <Breadcrumbs
+              separator={<NavigateNextIcon fontSize="small" />}
+              aria-label="breadcrumb"
+            >
+              {renderBreadcrumbs()}
+            </Breadcrumbs>
+          </StyledNavBar>
 
           {/* page container */}
           <StyledPageContainer>

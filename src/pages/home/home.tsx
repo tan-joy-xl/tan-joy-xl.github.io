@@ -5,12 +5,13 @@ import Grid from "@mui/material/Grid";
 import Stack from '@mui/material/Stack';
 
 import { ShowBox } from "../components/show-box";
+import { GridBox } from "./components/grid-box";
+import { HorizScrollBox } from "./components/horizonta-scroll-box";
 
 import styled from "@emotion/styled";
 
 const StyledPage = styled(Box)({
-  margin: '15px 30px',
-  padding: '15px',
+  margin: '15px 0',
 });
 
 const Home = (): ReactElement => {
@@ -18,18 +19,13 @@ const Home = (): ReactElement => {
 
   return (
     <StyledPage>
-      <Grid container spacing={1.5} sx={{ height: '68vh' }}>
-        <Grid item xs={9} sx={{ fontSize: '2vw' }}>
-          <ShowBox></ShowBox>
-        </Grid>
-        <Grid item xs={3} sx={{ fontSize: '1vw', display: { xs: 'none', md: 'block' } }}>
-          <Stack direction="column" spacing={1.5}>
-            <ShowBox></ShowBox>
-            <ShowBox></ShowBox>
-            <ShowBox></ShowBox>
-          </Stack>
-        </Grid>
-      </Grid>
+      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <GridBox />
+      </Box>
+
+      <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+        <HorizScrollBox />
+      </Box>
     </StyledPage>
   )
 }

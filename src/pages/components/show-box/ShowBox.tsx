@@ -2,9 +2,9 @@ import { ReactElement } from 'react';
 import Box from '@mui/material/Box';
 import styled from '@emotion/styled';
 import Typography from '@mui/material/Typography';
-import { margin } from '@mui/system';
 
 interface ShowBoxProps {
+  sx?: any;
   tag?: string;
   title?: string;
   subTitle?: any;
@@ -13,10 +13,9 @@ interface ShowBoxProps {
 const StyledContainer = styled(Box)({
   overflow: 'hidden',
   height: '100%',
-  minHeight: '130px',
   position: 'relative',
   backgroundImage: 'url(/bg3.jpeg)',
-  backgroundSize: '120%',
+  backgroundSize: '160%',
   backgroundPositionX: '50%',
   backgroundRepeat: 'no-repeat',
   color: 'rgb(255, 255, 255)',
@@ -79,9 +78,9 @@ const StyledSubTitle = styled(Box)({
 
 
 export const ShowBox = (props: ShowBoxProps): ReactElement => {
-  const { tag, title, subTitle } = props;
+  const { sx, tag, title, subTitle } = props;
   return (
-    <StyledContainer>
+    <StyledContainer sx={sx}>
       <StyledMoveBox className="move-box">
         <StyledTag>{tag || 'Politics'}</StyledTag>
         <Typography variant="h5" sx={{ fontSize: '1.4em' }}>
