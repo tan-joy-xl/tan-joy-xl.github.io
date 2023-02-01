@@ -21,20 +21,13 @@ import Stack from '@mui/material/Stack';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import TwitterIcon from '@mui/icons-material/Twitter';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import RedditIcon from '@mui/icons-material/Reddit';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { WeiboOutlined } from '@ant-design/icons';
-
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { appRoutes } from './pages/routers';
+import { Actions } from './utils';
 import './App.css';
 
 interface Props {
@@ -53,34 +46,6 @@ interface Action {
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
-const Actions: Action[] = [
-  {
-    type: 'twitter',
-    icon: <TwitterIcon />,
-    link: 'https://twitter.com/JoyAdPear',
-  }, {
-    type: 'facebook',
-    icon: <FacebookIcon />,
-    link: 'https://www.facebook.com/profile.php?id=100089281386990',
-  }, {
-    type: 'instagram',
-    icon: <InstagramIcon />
-  }, {
-    type: 'youtube',
-    icon: <YouTubeIcon />
-  }, {
-    type: 'reddit',
-    icon: <RedditIcon />
-  }, {
-    type: 'github',
-    icon: <GitHubIcon />,
-    link: 'https://github.com/tan-joy-xl',
-  }, {
-    type: '微博',
-    icon: <WeiboOutlined />,
-    link: 'https://weibo.com/u/3898663642',
-  },
-];
 
 const tabs: any[] = [
   {
@@ -258,8 +223,6 @@ const App = (props: Props) => {
   const [value, setValue] = useState(0);
   const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
   const [tipBoxOpt, setTipBoxOpt] = useState<any>({});
-
-
   const theme = useTheme();
 
   useEffect(() => {
@@ -328,9 +291,6 @@ const App = (props: Props) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      {/* <Typography variant="h6" sx={{ my: 2 }}>
-        Pear&Jony
-      </Typography> */}
       <Toolbar />
       <Divider sx={{ bgcolor: 'rgba(84, 84, 84, .48)' }} />
       <List>
@@ -434,7 +394,6 @@ const App = (props: Props) => {
                     onMouseOver={() => setTabVal(index)}
                   />
                 ))}
-
               </StyledTabs>
 
               <StyledTabPanel id="tabs-panel">
@@ -442,12 +401,10 @@ const App = (props: Props) => {
               </StyledTabPanel>
             </StyledTabsContainer>
 
-
             <StyledCenterBox theme={theme} sx={{ mt: 2 }}>
               <Typography variant="h4" sx={{ mb: 2 }} >{tipBoxOpt?.title}</Typography>
               {tipBoxOpt?.content}
             </StyledCenterBox>
-
 
           </Box>
           <StyledNavBar>
@@ -573,6 +530,6 @@ const App = (props: Props) => {
       </Box>
     </StyledContainer>
   )
-}
+};
 
-export default App
+export default App;
