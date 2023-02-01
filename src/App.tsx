@@ -437,7 +437,7 @@ const App = (props: Props) => {
                   </Box>
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
-                    {Actions.map((action: Action, index: number) => (
+                    {Actions.map((action: any, index: number) => (
                       <StyledIconButton
                         key={`${action?.type}-${index}`}
                         theme={theme}
@@ -490,7 +490,7 @@ const App = (props: Props) => {
                   </Box>
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
-                    {Actions.map((action: Action, index: number) => (
+                    {Actions.map((action: any, index: number) => (
                       <StyledIconButton
                         key={`${action?.type}-${index}`}
                         theme={theme}

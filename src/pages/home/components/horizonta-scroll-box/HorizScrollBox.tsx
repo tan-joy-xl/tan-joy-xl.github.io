@@ -28,7 +28,7 @@ const StyledScollItem = styled(Box)({
 
 export const HorizScrollBox = () => {
   return (
-    <Stack direction="column" spacing={1.5}>
+    <Stack direction="column" spacing={'2vw'}>
       <Box sx={{ height: '50vw' }}>
         <ShowBox />
       </Box>
