@@ -21,4 +21,5 @@ const theme = createTheme({
 export default createTheme(theme, {
   fontColor: '#ffffff',
   subColor: 'rgb(168, 168, 168)',
+  footerFontColor: 'hsla(0,0%,100%,.8)',
 });

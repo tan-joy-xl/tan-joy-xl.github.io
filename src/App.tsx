@@ -27,7 +27,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { appRoutes } from './pages/routers';
-import { Actions } from './utils';
+import { AppConfig } from './utils';
 import './App.css';
 
 interface Props {
@@ -192,10 +192,17 @@ const StyledTab = styled(Tab)<{ theme: any }>(({ theme }) => ({
   },
 }));
 
-const StyledLink = styled(Link)({
-  cursor: 'pointer',
+const StyledLink = styled(Link)<{ theme: any }>(({ theme }) => ({
+  color: theme.footerFontColor,
   fontSize: '14px',
-});
+  fontWeight: 700,
+  textTransform: 'capitalize',
+  cursor: 'pointer',
+  '&:hover': {
+    color: '#fff',
+  },
+}));
+
 
 const StyledTabPanel = styled(Box)({
   maxWidth: '90vw',
@@ -216,8 +223,24 @@ const StyledTabPanel = styled(Box)({
   },
 });
 
+const StyledLinkList = styled(List)({
+  display: 'flex',
+  overflow: 'hidden',
+  flexWrap: 'wrap',
+});
+
+const StyledLinkItem = styled(ListItem)({
+  width: '9vw',
+  display: 'inline-block',
+  paddingBottom: '10px',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
+
 const App = (props: Props) => {
   const { window } = props;
+  const { footerConfig } = AppConfig;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [tabVal, setTabVal] = useState(0);
   const [value, setValue] = useState(0);
@@ -278,14 +301,14 @@ const App = (props: Props) => {
           {item?.name}
         </Typography>;
       }
-      return <StyledLink
+      return <Link
         key={item.path}
         underline="none"
         color="inherit"
         href={item?.path || ''}
       >
         {item?.name}
-      </StyledLink>;
+      </Link>;
     })
   };
 
@@ -437,7 +460,7 @@ const App = (props: Props) => {
                   </Box>
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
-                    {Actions.map((action: any, index: number) => (
+                    {footerConfig.actions.map((action: any, index: number) => (
                       <StyledIconButton
                         key={`${action?.type}-${index}`}
                         theme={theme}
@@ -452,13 +475,18 @@ const App = (props: Props) => {
 
                 <Grid item xs={4}>
                   <Box>
-                    <Typography variant="h5" sx={{ color: 'rgb(249, 61, 83)' }}>
+                    <Typography variant="h5" sx={{ color: 'rgb(249, 61, 83)', ml: '16px' }}>
                       Pear&Jony
                     </Typography>
-                    We bring you the latest WordPress News,
-                    Reviews and Tutorials so you can learn
-                    how to create amazing WordPress websites
-                    for yourself and clients!
+                    <StyledLinkList>
+                      {footerConfig.navActions.map((item) => (
+                        <StyledLinkItem>
+                          <StyledLink theme={theme} href={item.link}>
+                            {item.name}
+                          </StyledLink>
+                        </StyledLinkItem>
+                      ))}
+                    </StyledLinkList>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
@@ -490,7 +518,7 @@ const App = (props: Props) => {
                   </Box>
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
-                    {Actions.map((action: any, index: number) => (
+                    {footerConfig.actions.map((action: any, index: number) => (
                       <StyledIconButton
                         key={`${action?.type}-${index}`}
                         theme={theme}
@@ -505,12 +533,17 @@ const App = (props: Props) => {
 
                 <Box>
                   <Typography variant="h5" sx={{ color: 'rgb(249, 61, 83)' }}>
-                    Pear&Jony
+                    Browse by Category
                   </Typography>
-                  We bring you the latest WordPress News,
-                  Reviews and Tutorials so you can learn
-                  how to create amazing WordPress websites
-                  for yourself and clients!
+                  <StyledLinkList>
+                    {footerConfig.navActions.map((item) => (
+                      <StyledLinkItem>
+                        <StyledLink theme={theme} href={item.link}>
+                          {item.name}
+                        </StyledLink>
+                      </StyledLinkItem>
+                    ))}
+                  </StyledLinkList>
                 </Box>
                 <Box>
                   <Typography variant="h5">
