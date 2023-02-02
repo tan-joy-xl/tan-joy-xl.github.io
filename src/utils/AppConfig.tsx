@@ -54,9 +54,28 @@ export const AppConfig: AppConfiguration = {
         link: '',
       },
     ],
-
     navActions: [
       {
+        name: 'Apps',
+        label: 'Apps',
+        link: '/',
+      }, {
+        name: 'Apps',
+        label: 'Apps',
+        link: '/',
+      }, {
+        name: 'Apps',
+        label: 'Apps',
+        link: '/',
+      }, {
+        name: 'Apps',
+        label: 'Apps',
+        link: '/',
+      }, {
+        name: 'Apps',
+        label: 'Apps',
+        link: '/',
+      }, {
         name: 'Apps',
         label: 'Apps',
         link: '/home',

@@ -198,6 +198,7 @@ const StyledLink = styled(Link)<{ theme: any }>(({ theme }) => ({
   fontWeight: 700,
   textTransform: 'capitalize',
   cursor: 'pointer',
+  textDecoration: 'none',
   '&:hover': {
     color: '#fff',
   },
@@ -554,7 +555,6 @@ const App = (props: Props) => {
                   how to create amazing WordPress websites
                   for yourself and clients!
                 </Box>
-
               </Stack>
             </Box>
             <StyledDivider theme={theme} />
