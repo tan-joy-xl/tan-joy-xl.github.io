@@ -22,4 +22,5 @@ export default createTheme(theme, {
   fontColor: '#ffffff',
   subColor: 'rgb(168, 168, 168)',
   footerFontColor: 'hsla(0,0%,100%,.8)',
+  tagBgColor: 'rgb(5, 112, 193)',
 });

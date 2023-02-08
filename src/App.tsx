@@ -162,32 +162,40 @@ const StyledTabsContainer = styled(Box)({
   borderBottom: '1px solid rgb(232, 232, 232)',
 });
 
-const StyledTabs = styled(Tabs)({
+const StyledTabs = styled(Tabs)<{ theme: any }>(({ theme }) => ({
   '&:hover + #tabs-panel': {
     opacity: 1,
     display: 'block',
     transition: '2s ease',
   },
-});
+  '& .MuiTabs-indicator': {
+    width: '76px !important',
+    backgroundColor: theme.tagBgColor,
+  },
+}));
 
 const StyledTab = styled(Tab)<{ theme: any }>(({ theme }) => ({
+  overflow: 'hidden',
   position: 'relative',
   '&:after': {
     display: 'block',
     content: 'close-quote',
     width: 0,
     height: '2px',
-    backgroundColor: theme.palette.primary.main,
+    marginLeft: '20px',
     position: 'absolute',
+    left: '-30%',
     bottom: 10,
+    backgroundColor: theme.tagBgColor,
     zIndex: 2,
     transition: '.5s ease',
   },
   '&:hover': {
     transition: '.5s ease',
     '&:after': {
-      width: '90%',
-      transition: '1.5s ease',
+      width: '76px',
+      transition: '0.5s ease',
+      backgroundColor: 'rgb(5, 112, 193)',
     },
   },
 }));
@@ -231,7 +239,11 @@ const StyledLinkList = styled(List)({
 });
 
 const StyledLinkItem = styled(ListItem)({
-  width: '9vw',
+  width: '10vw',
+  minWidth: '80px',
+  height: '28px',
+  lineHeight: '28px',
+  padding: 0,
   display: 'inline-block',
   paddingBottom: '10px',
   overflow: 'hidden',
@@ -404,6 +416,7 @@ const App = (props: Props) => {
               <StyledTabs
                 className="tabs"
                 value={value}
+                theme={theme}
                 onChange={handleChange}
                 sx={{ height: '100%' }}
               >
@@ -476,7 +489,7 @@ const App = (props: Props) => {
 
                 <Grid item xs={4}>
                   <Box>
-                    <Typography variant="h5" sx={{ color: 'rgb(249, 61, 83)', ml: '16px' }}>
+                    <Typography variant="h5" sx={{ color: 'rgb(249, 61, 83)' }}>
                       Pear&Jony
                     </Typography>
                     <StyledLinkList>

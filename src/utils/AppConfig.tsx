@@ -60,26 +60,35 @@ export const AppConfig: AppConfiguration = {
         label: 'Apps',
         link: '/',
       }, {
-        name: 'Apps',
-        label: 'Apps',
+        name: 'Gadget',
+        label: 'Gadget',
         link: '/',
       }, {
-        name: 'Apps',
-        label: 'Apps',
+        name: 'Food',
+        label: 'Food',
         link: '/',
       }, {
-        name: 'Apps',
-        label: 'Apps',
+        name: 'Fashion',
+        label: 'Fashion',
         link: '/',
       }, {
-        name: 'Apps',
-        label: 'Apps',
+        name: 'Entertainment',
+        label: 'Entertainment',
         link: '/',
       }, {
-        name: 'Apps',
-        label: 'Apps',
+        name: 'Gaming',
+        label: 'Gaming',
         link: '/home',
+      }, {
+        name: 'Health',
+        label: 'Health',
+        link: '/',
+      }, {
+        name: 'Lifestyle',
+        label: 'Lifestyle',
+        link: '/Lifestyle',
       },
     ],
   },
 };
+
