@@ -239,10 +239,11 @@ const StyledLinkList = styled(List)({
 });
 
 const StyledLinkItem = styled(ListItem)({
-  width: '10vw',
+  width: '8vw',
   minWidth: '80px',
   height: '28px',
   lineHeight: '28px',
+  marginRight: '1vw',
   padding: 0,
   display: 'inline-block',
   paddingBottom: '10px',
