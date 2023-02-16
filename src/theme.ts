@@ -7,6 +7,9 @@ const theme = createTheme({
     },
     secondary: purple,
   },
+  typography: {
+    fontFamily: 'Nunito Medium, Helvetica, Arial, sans-serif',
+  },
   components: {
     MuiTab: {
       styleOverrides: {

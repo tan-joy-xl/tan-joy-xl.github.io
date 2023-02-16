@@ -214,13 +214,13 @@ const StyledLink = styled(Link)<{ theme: any }>(({ theme }) => ({
 
 
 const StyledTabPanel = styled(Box)({
-  maxWidth: '90vw',
-  padding: 20,
+  width: '88vw',
   margin: '1 auto',
   position: 'absolute',
+  left: '50%',
+  marginLeft: '-44vw',
   display: 'none',
   opacity: 0,
-  height: 300,
   backgroundColor: '#ffffff',
   zIndex: 2,
   transition: '2s ease',

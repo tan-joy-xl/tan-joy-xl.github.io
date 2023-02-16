@@ -1,3 +1,13 @@
 #root {
   width: 100%;
 }
+
+@font-face {
+  font-family: 'Nunito Light';
+  src: url(./assets/fonts/Nunito-Light.ttf);
+}
+
+@font-face {
+  font-family: 'Nunito Medium';
+  src: url(./assets/fonts/Nunito-Medium.ttf);
+}
