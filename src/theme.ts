@@ -27,4 +27,5 @@ export default createTheme(theme, {
   footerFontColor: 'hsla(0,0%,100%,.8)',
   tagBgColor: 'rgb(5, 112, 193)',
   RlightColor: 'rgb(249, 61, 83)',
+  tabPanelColor: '#f9f9f9',
 });

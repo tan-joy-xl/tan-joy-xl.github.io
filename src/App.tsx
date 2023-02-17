@@ -20,6 +20,7 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
@@ -46,50 +47,6 @@ interface Action {
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
-
-const tabs: any[] = [
-  {
-    icon: '',
-    label: 'ONE',
-    context: {
-      title: 'Gaming One',
-      content: `A wonderful serenity has taken
-      possession of my entire soul,
-      like these sweet mornings of
-      spring which I enjoy with my whole heart.`
-    },
-  }, {
-    icon: '',
-    label: 'TWO',
-    context: {
-      title: 'Gaming Two',
-      content: `A wonderful serenity has taken
-      possession of my entire soul,
-      like these sweet mornings of
-      spring which I enjoy with my whole heart.`
-    },
-  }, {
-    icon: '',
-    label: 'THREE',
-    context: {
-      title: 'Gaming Three',
-      content: `A wonderful serenity has taken
-      possession of my entire soul,
-      like these sweet mornings of
-      spring which I enjoy with my whole heart.`
-    },
-  }, {
-    icon: '',
-    label: 'FOUR',
-    context: {
-      title: 'Gaming Four',
-      content: `A wonderful serenity has taken
-      possession of my entire soul,
-      like these sweet mornings of
-      spring which I enjoy with my whole heart.`
-    },
-  },
-];
 
 const StyledContainer = styled(Box)({
   with: '100vw',
@@ -165,8 +122,8 @@ const StyledTabsContainer = styled(Box)({
 const StyledTabs = styled(Tabs)<{ theme: any }>(({ theme }) => ({
   '&:hover + #tabs-panel': {
     opacity: 1,
-    display: 'block',
-    transition: '2s ease',
+    visibility: 'visible',
+    transition: '.2s ease',
   },
   '& .MuiTabs-indicator': {
     width: '76px !important',
@@ -214,21 +171,23 @@ const StyledLink = styled(Link)<{ theme: any }>(({ theme }) => ({
 
 
 const StyledTabPanel = styled(Box)({
+  minHeight: '240px',
   width: '88vw',
   margin: '1 auto',
   position: 'absolute',
   left: '50%',
   marginLeft: '-44vw',
-  display: 'none',
-  opacity: 0,
-  backgroundColor: '#ffffff',
+  // visibility: 'hidden',
+  visibility: 'visible',
+  // opacity: 0,
   zIndex: 2,
-  transition: '2s ease',
+  transition: '.2s ease',
   border: '1px solid #eee',
+  backgroundColor: '#ffffff',
   '&:hover': {
     opacity: 1,
     display: 'block',
-    transition: '2s ease',
+    transition: '.2s ease',
   },
 });
 
@@ -252,19 +211,70 @@ const StyledLinkItem = styled(ListItem)({
   whiteSpace: 'nowrap',
 });
 
+const StyledListTabItem = styled(ListItem)({
+  boxSizing: 'content-box',
+  margin: 0,
+  padding: 0,
+  borderRight: '1px #eee solid',
+  borderTop: '1px #f9f9f9 solid',
+  borderBottom: '1px #f9f9f9 solid',
+  backgroundColor: '#f9f9f9',
+
+  '&:hover': {
+    borderTop: '1px #eee solid',
+    borderBottom: '1px #eee solid',
+    borderRight: '1px #fff solid',
+    backgroundColor: '#fff',
+    transition: '.2s ease',
+  },
+});
+
+const StyledListItemButton = styled(ListItemButton)({
+  padding: 0,
+  backgroundColor: '#f9f9f9',
+});
+
+const StyledListItemText = styled(ListItemButton)({
+  margin: 0,
+  padding: '4px 16px',
+  '&:hover': {
+    backgroundColor: '#ffffff',
+  }
+});
+
+const StyledTabList = styled(List)({
+  minHeight: '240px',
+  backgroundColor: '#f9f9f9',
+  borderRight: '1px solid #eee',
+
+  '& .hoveredItem': {
+    borderTop: '1px #eee solid',
+    borderBottom: '1px #eee solid',
+    borderRight: '1px #fff solid',
+  },
+
+  '& .hoveredText': {
+    backgroundColor: '#fff',
+  }
+});
+
 const App = (props: Props) => {
   const { window } = props;
-  const { footerConfig } = AppConfig;
+  const { navTabsConfig, footerConfig } = AppConfig;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [tabVal, setTabVal] = useState(0);
   const [value, setValue] = useState(0);
   const [breadcrumbs, setBreadcrumbs] = useState<any[]>([]);
   const [tipBoxOpt, setTipBoxOpt] = useState<any>({});
+  const [hoverIndex, setHoverIndex] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hoverTabsOpts, setHoverTabsOpts] = useState<any[]>([])
   const theme = useTheme();
 
   useEffect(() => {
     getBreadcrumbs();
-    setTipBoxOpt(tabs[0]?.context)
+    setTipBoxOpt(navTabsConfig[0]?.context)
+    setHoverTabsOpts(navTabsConfig[0]?.children)
   }, []);
 
   const getBreadcrumbs = () => {
@@ -294,7 +304,7 @@ const App = (props: Props) => {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    setTipBoxOpt(tabs[newValue]?.context || {});
+    setTipBoxOpt(navTabsConfig[newValue]?.context || {});
   };
 
   const handleAction = (action: Action) => {
@@ -339,6 +349,12 @@ const App = (props: Props) => {
           </ListItem>
         ))}
       </List>
+    </Box>
+  );
+
+  const loadingWarp = (
+    <Box sx={{ width: '100%', height: '100%', display: 'grid', placeContent: 'center' }}>
+      <CircularProgress size={88} color="inherit" />
     </Box>
   );
 
@@ -421,7 +437,7 @@ const App = (props: Props) => {
                 onChange={handleChange}
                 sx={{ height: '100%' }}
               >
-                {tabs.map((tab: any, index: number) => (
+                {navTabsConfig.map((tab: any, index: number) => (
                   <StyledTab
                     className="tab-item"
                     theme={theme}
@@ -429,13 +445,48 @@ const App = (props: Props) => {
                     label={tab?.label}
                     icon={<KeyboardArrowDownIcon />}
                     iconPosition="end"
-                    onMouseOver={() => setTabVal(index)}
+                    onMouseOver={() => {
+                      setTabVal(index);
+                      setHoverTabsOpts(navTabsConfig[index]?.children);
+                    }}
                   />
                 ))}
               </StyledTabs>
 
               <StyledTabPanel id="tabs-panel">
-                {tabVal}
+                <Grid container>
+                  <Grid item xs={2}>
+                    <StyledTabList>
+                      {hoverTabsOpts.map((item: any, index: number) => (
+                        <StyledListTabItem
+                          className={`${index === hoverIndex ? 'hoveredItem' : ''}`}
+                        >
+                          <StyledListItemButton>
+                            <StyledListItemText
+                              onMouseOver={() => {
+                                setHoverIndex(index)
+                                setLoading(true);
+                              }}
+                              onMouseLeave={() => setLoading(false)}
+                              className={`${index === hoverIndex ? 'hoveredText' : ''}`}
+                            >
+                              {item.name}
+                            </StyledListItemText>
+                          </StyledListItemButton>
+                        </StyledListTabItem>
+                      ))}
+                    </StyledTabList>
+
+                  </Grid>
+                  <Grid item xs={10}>
+                    {loading ? (
+                      loadingWarp
+                    ) : (
+                      <></>
+                    )}
+
+                  </Grid>
+                </Grid>
               </StyledTabPanel>
             </StyledTabsContainer>
 
@@ -574,8 +625,8 @@ const App = (props: Props) => {
             <StyledDivider theme={theme} />
           </StyledFooter>
         </StyledMainBox>
-      </Box>
-    </StyledContainer>
+      </Box >
+    </StyledContainer >
   )
 };
 
