@@ -2,7 +2,6 @@ import type { ReactElement } from 'react';
 import { useState, useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import styled from '@emotion/styled';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -18,15 +17,37 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import CircularProgress from '@mui/material/CircularProgress';
-
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 
+import {
+  StyledContainer,
+  StyledMainBox,
+  StyledFooter,
+  StyledIconButton,
+  StyledDivider,
+  StyledNavBar,
+  StyledADContainer,
+  StyledPageContainer,
+  StyledCenterBox,
+  StyledTabsContainer,
+  StyledTabs,
+  StyledTab,
+  StyledLink,
+  StyledTabPanel,
+  StyledLinkList,
+  StyledLinkItem,
+  StyledListTabItem,
+  StyledListItemButton,
+  StyledListItemText,
+  StyledTabList,
+} from './styles';
 import { appRoutes } from './pages/routers';
 import { AppConfig } from './utils';
 import './App.css';
@@ -48,215 +69,6 @@ interface Action {
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
-const StyledContainer = styled(Box)({
-  with: '100vw',
-  height: '100vh',
-});
-
-const StyledMainBox = styled(Box)({
-  width: '100%',
-  height: '100%',
-});
-
-const StyledFooter = styled(Box)<{ theme: any }>(({ theme }) => ({
-  height: '100%',
-  padding: 40,
-  color: theme.subColor,
-  backgroundColor: theme.palette.primary.main,
-}));
-
-const StyledIconButton = styled(IconButton)<{ theme: any }>(({ theme }) => (({
-  backgroundColor: 'rgb(66, 66, 66)',
-  borderRadius: 4,
-  color: theme.fontColor,
-  '&:hover': {
-    backgroundColor: theme.palette.info.main,
-    transition: '0.3s',
-  }
-})));
-
-const StyledDivider = styled(Divider)<{ theme: any }>(({ theme }) => ({
-  marginTop: 40,
-  marginBottom: 40,
-  backgroundColor: theme.subColor,
-}));
-
-const StyledNavBar = styled(Box)({
-  paddingTop: '8px',
-  paddingBottom: '8px',
-  paddingLeft: '30px',
-  borderBottom: '1px solid #eee',
-  marginBottom: '20px',
-});
-
-const StyledADContainer = styled(Box)({
-  height: 130,
-  backgroundImage: 'url(/bg3.jpeg)',
-  backgroundSize: 'cover',
-  backgroundPositionY: '55%',
-});
-
-const StyledPageContainer = styled(Box)({
-  paddingLeft: '2vw',
-  paddingRight: '2vw',
-});
-
-const StyledCenterBox = styled(Box)<{ theme: any }>(({ theme }) => ({
-  height: 300,
-  paddingLeft: 40,
-  paddingRight: 40,
-  textAlign: 'center',
-  display: 'grid',
-  placeContent: 'center',
-  color: theme.fontColor,
-  backgroundColor: theme.palette.primary.main,
-}));
-
-const StyledTabsContainer = styled(Box)({
-  display: 'inline-block',
-  padding: '0 20px',
-  height: 50,
-  borderBottom: '1px solid rgb(232, 232, 232)',
-});
-
-const StyledTabs = styled(Tabs)<{ theme: any }>(({ theme }) => ({
-  '&:hover + #tabs-panel': {
-    opacity: 1,
-    visibility: 'visible',
-    transition: '.2s ease',
-  },
-  '& .MuiTabs-indicator': {
-    width: '76px !important',
-    backgroundColor: theme.tagBgColor,
-  },
-}));
-
-const StyledTab = styled(Tab)<{ theme: any }>(({ theme }) => ({
-  overflow: 'hidden',
-  position: 'relative',
-  '&:after': {
-    display: 'block',
-    content: 'close-quote',
-    width: 0,
-    height: '2px',
-    marginLeft: '20px',
-    position: 'absolute',
-    left: '-30%',
-    bottom: 10,
-    backgroundColor: theme.tagBgColor,
-    zIndex: 2,
-    transition: '.5s ease',
-  },
-  '&:hover': {
-    transition: '.5s ease',
-    '&:after': {
-      width: '76px',
-      transition: '0.5s ease',
-      backgroundColor: 'rgb(5, 112, 193)',
-    },
-  },
-}));
-
-const StyledLink = styled(Link)<{ theme: any }>(({ theme }) => ({
-  color: theme.footerFontColor,
-  fontSize: '14px',
-  fontWeight: 700,
-  textTransform: 'capitalize',
-  cursor: 'pointer',
-  textDecoration: 'none',
-  '&:hover': {
-    color: '#fff',
-  },
-}));
-
-
-const StyledTabPanel = styled(Box)({
-  minHeight: '240px',
-  width: '88vw',
-  margin: '1 auto',
-  position: 'absolute',
-  left: '50%',
-  marginLeft: '-44vw',
-  // visibility: 'hidden',
-  visibility: 'visible',
-  // opacity: 0,
-  zIndex: 2,
-  transition: '.2s ease',
-  border: '1px solid #eee',
-  backgroundColor: '#ffffff',
-  '&:hover': {
-    opacity: 1,
-    display: 'block',
-    transition: '.2s ease',
-  },
-});
-
-const StyledLinkList = styled(List)({
-  display: 'flex',
-  overflow: 'hidden',
-  flexWrap: 'wrap',
-});
-
-const StyledLinkItem = styled(ListItem)({
-  width: '8vw',
-  minWidth: '80px',
-  height: '28px',
-  lineHeight: '28px',
-  marginRight: '1vw',
-  padding: 0,
-  display: 'inline-block',
-  paddingBottom: '10px',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-});
-
-const StyledListTabItem = styled(ListItem)({
-  boxSizing: 'content-box',
-  margin: 0,
-  padding: 0,
-  borderRight: '1px #eee solid',
-  borderTop: '1px #f9f9f9 solid',
-  borderBottom: '1px #f9f9f9 solid',
-  backgroundColor: '#f9f9f9',
-
-  '&:hover': {
-    borderTop: '1px #eee solid',
-    borderBottom: '1px #eee solid',
-    borderRight: '1px #fff solid',
-    backgroundColor: '#fff',
-    transition: '.2s ease',
-  },
-});
-
-const StyledListItemButton = styled(ListItemButton)({
-  padding: 0,
-  backgroundColor: '#f9f9f9',
-});
-
-const StyledListItemText = styled(ListItemButton)({
-  margin: 0,
-  padding: '4px 16px',
-  '&:hover': {
-    backgroundColor: '#ffffff',
-  }
-});
-
-const StyledTabList = styled(List)({
-  minHeight: '240px',
-  backgroundColor: '#f9f9f9',
-  borderRight: '1px solid #eee',
-
-  '& .hoveredItem': {
-    borderTop: '1px #eee solid',
-    borderBottom: '1px #eee solid',
-    borderRight: '1px #fff solid',
-  },
-
-  '& .hoveredText': {
-    backgroundColor: '#fff',
-  }
-});
 
 const App = (props: Props) => {
   const { window } = props;
@@ -438,6 +250,7 @@ const App = (props: Props) => {
                 sx={{ height: '100%' }}
               >
                 {navTabsConfig.map((tab: any, index: number) => (
+
                   <StyledTab
                     className="tab-item"
                     theme={theme}
@@ -453,7 +266,8 @@ const App = (props: Props) => {
                 ))}
               </StyledTabs>
 
-              <StyledTabPanel id="tabs-panel">
+
+              {/* <StyledTabPanel id="tabs-panel">
                 <Grid container>
                   <Grid item xs={2}>
                     <StyledTabList>
@@ -487,7 +301,7 @@ const App = (props: Props) => {
 
                   </Grid>
                 </Grid>
-              </StyledTabPanel>
+              </StyledTabPanel> */}
             </StyledTabsContainer>
 
             <StyledCenterBox theme={theme} sx={{ mt: 2 }}>
@@ -626,6 +440,15 @@ const App = (props: Props) => {
           </StyledFooter>
         </StyledMainBox>
       </Box >
+
+      {/* TODO  SpeedDial  */}
+      <SpeedDial
+        ariaLabel="SpeedDial basic example"
+        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        icon={<SpeedDialIcon />}
+      >
+        <SpeedDialAction tooltipTitle="Back Top" />
+      </SpeedDial>
     </StyledContainer >
   )
 };

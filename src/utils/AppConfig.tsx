@@ -183,36 +183,44 @@ export const AppConfig: AppConfiguration = {
         type: 'twitter',
         icon: <TwitterIcon />,
         link: 'https://twitter.com/JoyAdPear',
-      }, {
+      },
+      {
         type: 'facebook',
         icon: <FacebookIcon />,
         link: 'https://www.facebook.com/profile.php?id=100089281386990',
-      }, {
+      },
+      {
         type: 'instagram',
         icon: <InstagramIcon />
-      }, {
+      },
+      {
         type: 'youtube',
         icon: <YouTubeIcon />
-      }, {
+      },
+      {
         type: 'reddit',
         icon: <RedditIcon />
-      }, {
+      },
+      {
         type: 'github',
         icon: <GitHubIcon />,
         link: 'https://github.com/tan-joy-xl',
-      }, {
+      },
+      {
         type: '微博',
         icon: <WeiboOutlined />,
         link: 'https://weibo.com/u/3898663642',
-      }, {
+      },
+      {
         type: 'b站',
         icon: <BilibiliOutlined />,
         link: '',
-      }, {
-        type: '微信公众号',
-        icon: <WechatOutlined />,
-        link: '',
       },
+      // {
+      //   type: '微信公众号',
+      //   icon: <WechatOutlined />,
+      //   link: '',
+      // },
     ],
     navActions: [
       {
