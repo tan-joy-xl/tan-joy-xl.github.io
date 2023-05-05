@@ -81,7 +81,7 @@ const App = (props: Props) => {
   const [hoverIndex, setHoverIndex] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const [hoverTabsOpts, setHoverTabsOpts] = useState<any[]>([])
-  const theme = useTheme();
+  const theme: any = useTheme();
 
   useEffect(() => {
     getBreadcrumbs();
@@ -121,7 +121,7 @@ const App = (props: Props) => {
 
   const handleAction = (action: Action) => {
     if (!action.link || window) {
-      return alert('Just wait a fe time！it in development！ ♥ pear~');
+      return alert('Just wait a fe time！it in development！ ♥');
     }
     open(action.link);
   };
@@ -191,7 +191,7 @@ const App = (props: Props) => {
               component="div"
               sx={{ flexGrow: 1, display: { xs: 'none', md: 'block' } }}
             >
-              Pear&Jony
+              S & Only Sharing
             </Typography>
             <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
               <Typography
@@ -199,7 +199,7 @@ const App = (props: Props) => {
                 component="span"
                 sx={{ display: { xs: 'block', md: 'none' } }}
               >
-                Pear&Jony
+                S&OS
               </Typography>
             </Box>
 
@@ -445,6 +445,7 @@ const App = (props: Props) => {
       <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        color={theme?.RlightColor}
         icon={<SpeedDialIcon />}
       >
         <SpeedDialAction tooltipTitle="Back Top" />
