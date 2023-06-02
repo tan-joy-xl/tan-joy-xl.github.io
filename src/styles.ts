@@ -95,6 +95,7 @@ export const StyledTabs = styled(Tabs)<{ theme: any }>(({ theme }) => ({
 export const StyledTab = styled(Tab)<{ theme: any }>(({ theme }) => ({
   overflow: 'hidden',
   position: 'relative',
+  fontWeight: '700 !important',
   '&:after': {
     display: 'block',
     content: 'close-quote',
@@ -137,9 +138,9 @@ export const StyledTabPanel = styled(Box)({
   position: 'absolute',
   left: '50%',
   marginLeft: '-44vw',
-  // visibility: 'hidden',
+  visibility: 'hidden',
   // visibility: 'visible',
-  // opacity: 0,
+  opacity: 0,
   zIndex: 2,
   transition: '.2s ease',
   border: '1px solid #eee',
@@ -148,6 +149,7 @@ export const StyledTabPanel = styled(Box)({
     opacity: 1,
     display: 'block',
     transition: '.2s ease',
+    visibility: 'visible',
   },
 });
 
@@ -187,6 +189,9 @@ export const StyledListTabItem = styled(ListItem)({
     backgroundColor: '#fff',
     transition: '.2s ease',
   },
+  '&:hover .tabs-panel': {
+    backgroundColor: 'red',
+  }
 });
 
 export const StyledListItemButton = styled(ListItemButton)({
@@ -197,8 +202,15 @@ export const StyledListItemButton = styled(ListItemButton)({
 export const StyledListItemText = styled(ListItemButton)({
   margin: 0,
   padding: '4px 16px',
+  fontWeight: 700,
+  display: 'block',
+  color: '#a0a0a0',
+  textTransform: 'uppercase',
+  transition: '.2s ease',
   '&:hover': {
     backgroundColor: '#ffffff',
+    color: '#000',
+    transition: '.2s ease',
   }
 });
 

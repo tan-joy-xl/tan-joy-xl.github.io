@@ -165,8 +165,8 @@ const App = (props: Props) => {
   );
 
   const loadingWarp = (
-    <Box sx={{ width: '100%', height: '100%', display: 'grid', placeContent: 'center' }}>
-      <CircularProgress size={88} color="inherit" />
+    <Box sx={{ width: '80%', height: '80%', display: 'grid', placeContent: 'center' }}>
+      <CircularProgress color="info" />
     </Box>
   );
 
@@ -267,7 +267,7 @@ const App = (props: Props) => {
               </StyledTabs>
 
 
-              {/* <StyledTabPanel id="tabs-panel">
+              <StyledTabPanel id="tabs-panel">
                 <Grid container>
                   <Grid item xs={2}>
                     <StyledTabList>
@@ -301,7 +301,7 @@ const App = (props: Props) => {
 
                   </Grid>
                 </Grid>
-              </StyledTabPanel> */}
+              </StyledTabPanel>
             </StyledTabsContainer>
 
             <StyledCenterBox theme={theme} sx={{ mt: 2 }}>
@@ -329,14 +329,11 @@ const App = (props: Props) => {
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               <Grid container spacing={6}>
                 <Grid item xs={4}>
-                  <Typography variant="h3">
-                    Pear&Jony
+                  <Typography variant="h3" fontSize="2rem" sx={{ mb: '10px' }}>
+                    S & Only Sharing
                   </Typography>
                   <Box>
-                    We bring you the latest WordPress News,
-                    Reviews and Tutorials so you can learn
-                    how to create amazing WordPress websites
-                    for yourself and clients!
+                    （分享吧）S&OS - Share And Only Sharing.
                   </Box>
                   <Box sx={{ mt: 2 }}>
                     <Typography variant="h6" sx={{ mb: 1 }}>Follow Us</Typography>
