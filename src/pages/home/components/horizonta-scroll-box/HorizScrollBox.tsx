@@ -45,8 +45,6 @@ export const HorizScrollBox = () => {
           </StyledScollItem>
         </StyledScollContainer>
       </StyledScollBox>
-
-
     </Stack>
   )
 }
